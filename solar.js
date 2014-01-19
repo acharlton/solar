@@ -6,7 +6,7 @@ $(function() {
         $('#heading').html("Raspberry Battery Statistics");
         
 	// clicking the buttons
-        $('.btn').click(function() {
+/*        $('.btn').click(function() {
                 var name = this.title;
                 var ds = this.id;
                 var chart = $('#container').highcharts();
@@ -25,7 +25,7 @@ $(function() {
                         	var x = new Date().getTime(); // current time
                             	$('#container').highcharts().series[1].addPoint([x, data[0]], true, true);
 			});
-		},10000);
+		},10000);*/
         });
 });
 
