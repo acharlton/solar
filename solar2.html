@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Dashboard</title>
+	<link rel="stylesheet" href="/solar/bootstrap/dist/css/bootstrap.min.css">
+	<script src="/solar/jquery-2.0.3.min.js" type="text/javascript"></script>
+
+	<!--<script src="http://code.highcharts.com/stock/highstock.js"></script>-->
+	<script src="/solar/highstock/js/highstock.js"></script>
+	<script src="/solar/highstock/js/modules/exporting.js"></script>
+	<script src="/solar/solar2.js" type="text/javascript"></script>
+	<style>
+	.panel{
+		height: 900px;
+	}
+	</style>
+</head>
+<body>
+<h2></h2>
+<div class="container">
+  <div class="row">
+    <div class="col-lg-9">
+	<div class="panel panel-primary">
+		<div class="panel-heading" id="heading"></div>
+		<div class="panel-body">
+			<div id="container">
+			</div>
+		</div>
+	</div>	
+    </div>
+    <div class="col-lg-3">
+	<div class="panel panel-primary">
+		<div class="panel-heading" id="stat_top">Last Readings</div>
+		<div class="panel-body">
+				<ul class="list-group inline"> 
+					<li class="list-group-item">Date:<span class="badge pull-right" id="time_stat"></span></li>
+				</ul>
+				<h5>Battery Data</h5>
+				<ul class="list-group inline"> 
+					<li class="list-group-item">Battery Volts:<span class="badge pull-right" id="battery"></span></li>
+				</ul>
+				<h5>Temperature Data</h5>
+				<ul class="list-group inline"> 
+					<li class="list-group-item">Ambient:<span class="badge pull-right" id="ambient_temp"></span></li>
+					<li class="list-group-item">CPU:<span class="badge pull-right" id="cpu_temp"></span></li>
+				</ul>
+				<h5>Usage Data</h5>
+				<ul class="list-group inline"> 
+					<li class="list-group-item">CPU %:<span class="badge pull-right" id="cpu_usage"></span></li>
+					<li class="list-group-item">RAM:<span class="badge pull-right" id="ram_used"></span></li>
+					<li class="list-group-item">Disk %:<span class="badge pull-right" id="disk_perc"></span></li>
+				</ul>
+		</div>
+	</div>
+     </div><!--end col-->
+ </div><!--end row-->
+ <div class="row">
+	<button id="start-stop">Start / Stop</button>
+	<button id="all-data">All Data</button>
+ </div>
+</div>
+<script>
+	var params = {};
+	window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m, key, value) {
+        	params[key] = decodeURIComponent(value);
+	}); 
+</script>
+</body>
+</html>
