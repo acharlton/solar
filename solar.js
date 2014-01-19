@@ -4,29 +4,6 @@ $(function() {
 		interval = '-2hours';
         main(resolution,interval);
         $('#heading').html("Raspberry Battery Statistics");
-        
-	// clicking the buttons
-/*        $('.btn').click(function() {
-                var name = this.title;
-                var ds = this.id;
-                var chart = $('#container').highcharts();
-                chart.showLoading('Loading data from server...');
-		$.getJSON('/cgi-bin/load_ds.pl?rrd=' + name + '&ds=' + ds + '&resolution=' + resolution + '&interval=' + interval, function(data) {
-                        $('#container').highcharts().addSeries({
-                                name: ds,
-                                data: data
-                        });
-                        $('#container').highcharts().hideLoading();
-                });
-                $(this).attr('disabled', true);
-                setInterval(function(){
-        		$.getJSON ('/cgi-bin/current_ds.pl?ds='+name, function (data) {
-				//var series = $('#container').highcharts().series[1];
-                        	var x = new Date().getTime(); // current time
-                            	$('#container').highcharts().series[1].addPoint([x, data[0]], true, true);
-			});
-		},10000);*/
-        });
 });
 
 function main(resolution,interval){
@@ -39,8 +16,8 @@ function main(resolution,interval){
 	var seriesOptions = [],
 		yAxisOptions = [],
 		seriesCounter = 0,
-		names = ['battery','cpu_temp','ram_total','ram_used','ram_free','disk_total','disk_free','disk_perc'],
-		//names = ['battery','cpu_temp'],
+		//names = ['battery','cpu_temp','ram_total','ram_used','ram_free','disk_total','disk_free','disk_perc'],
+		names = ['battery','cpu_temp','ram_used'],
 		colors = Highcharts.getOptions().colors;
 	$.each(names, function(i, name) {
 		$.getJSON('/cgi-bin/data_first_load.pl?data='+name.toLowerCase() + '&resolution=' + resolution + '&interval=' + interval, function(data) {
@@ -60,10 +37,15 @@ function main(resolution,interval){
 		    chart: {
 			height: 680,
 			type: 'areaspline',
-			zoomType: 'x'
-			/*events: {
+			zoomType: 'x',
+			events: {
 				load: function(){
-					var series = this.series[0];
+					var series1 = this.series[0];
+					var series2 = this.series[1];
+					var series3 = this.series[2];
+					console.log(series1);
+					console.log(series2);
+					console.log(series3);
                         		setInterval(function() {
         					$.getJSON ('/cgi-bin/current_battery.pl', function (data) {
                             				var x = new Date().getTime(); // current time
@@ -71,15 +53,22 @@ function main(resolution,interval){
                 					$('#time_stat').html(t);
                 					$('#battery').html(data[0] + 'V DC');
                 					//$('#ambient_temp').html(data[1]  + ' C');
-                					$('#cpu_temp').html(data[2]  + ' C');
+                					$('#cpu_temp').html(data[1]  + ' C');
                 					//$('#cpu_usage').html(data[3]  + ' %');
-                					$('#ram_used').html(data[4]  + 'MB');
-                					$('#disk_perc').html(data[8]  + ' %');
-                            				series.addPoint([x, data[0]], true, true);
+                					$('#ram_used').html(data[3]  + 'MB');
+                					$('#disk_perc').html(data[7]  + ' %');
+                            				series1.addPoint([x, data[0]], true, false);
+                            				series2.addPoint([x, data[1]], true, false);
+                            				//series.addPoint([x, data[2]], true, true);
+                            				series3.addPoint([x, data[3]], true, false);
+                            				//series.addPoint([x, data[4]], true, true);
+                            				//series.addPoint([x, data[5]], true, true);
+                            				//series.addPoint([x, data[6]], true, true);
+                            				//series.addPoint([x, data[7]], true, true);
         					});
                         		}, 10000);
 				}
-			}*/
+			}
 		    },
 		    navigator: {
 		    	adaptToUpdatedData: false,
