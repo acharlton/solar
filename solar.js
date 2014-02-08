@@ -1,7 +1,7 @@
 var pollChart;
 $(function() {
 	var resolution = '10',
-		interval = '-2hours';
+		interval = '-8hours';
         main(resolution,interval);
         $('#heading').html("Raspberry Battery Statistics");
 });
